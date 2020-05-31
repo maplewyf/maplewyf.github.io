@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="XSS攻击 全称跨站脚本攻击    它是一种在web应用中的计算机安全技术漏洞，它允许恶意web用户将代码植入到提供给其他页面使用的页面中      XSS攻击类型 一类是反射型XSS，又称非持久型XSS。当用受害者被引诱点击一个恶意链接，提交一个伪造的表单，恶意代码便会和正常返回数据一起作为响应发送到受害者的浏览器，从而骗过了浏览器，使之误以为恶意脚本来自于可信的服务器，以至于让恶意脚本得以执行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WEB常见的攻击">
+<meta property="og:url" content="http://yoursite.com/2020/02/05/web%E6%94%BB%E5%87%BB/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="XSS攻击 全称跨站脚本攻击    它是一种在web应用中的计算机安全技术漏洞，它允许恶意web用户将代码植入到提供给其他页面使用的页面中      XSS攻击类型 一类是反射型XSS，又称非持久型XSS。当用受害者被引诱点击一个恶意链接，提交一个伪造的表单，恶意代码便会和正常返回数据一起作为响应发送到受害者的浏览器，从而骗过了浏览器，使之误以为恶意脚本来自于可信的服务器，以至于让恶意脚本得以执行">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-02-05T10:00:54.987Z">
+<meta property="article:modified_time" content="2020-02-05T10:02:22.789Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>WEB常见的攻击</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2020/02/06/CSS%E5%B1%82%E5%8F%A0%E4%B8%8A%E4%B8%8B%E6%96%87%E5%92%8C%E5%B1%82%E5%8F%A0%E5%85%B3%E7%B3%BB/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2020/02/05/hello-world/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/02/05/web%E6%94%BB%E5%87%BB/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/02/05/web%E6%94%BB%E5%87%BB/&text=WEB常见的攻击" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/02/05/web%E6%94%BB%E5%87%BB/&title=WEB常见的攻击" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/02/05/web%E6%94%BB%E5%87%BB/&is_video=false&description=WEB常见的攻击" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=WEB常见的攻击&body=Check out this article: http://yoursite.com/2020/02/05/web%E6%94%BB%E5%87%BB/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/02/05/web%E6%94%BB%E5%87%BB/&title=WEB常见的攻击" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/02/05/web%E6%94%BB%E5%87%BB/&title=WEB常见的攻击" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/02/05/web%E6%94%BB%E5%87%BB/&title=WEB常见的攻击" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/02/05/web%E6%94%BB%E5%87%BB/&title=WEB常见的攻击" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/02/05/web%E6%94%BB%E5%87%BB/&name=WEB常见的攻击&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://yoursite.com/2020/02/05/web%E6%94%BB%E5%87%BB/&t=WEB常见的攻击" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#XSS攻击"><span class="toc-number">1.</span> <span class="toc-text">XSS攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSRF攻击"><span class="toc-number">2.</span> <span class="toc-text">CSRF攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DDOS攻击"><span class="toc-number">3.</span> <span class="toc-text">DDOS攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SYN-Flood"><span class="toc-number">4.</span> <span class="toc-text">SYN Flood</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ACK-Flood"><span class="toc-number">5.</span> <span class="toc-text">ACK Flood</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS-Query-Flood"><span class="toc-number">6.</span> <span class="toc-text">DNS Query Flood</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ICMP-flood"><span class="toc-number">7.</span> <span class="toc-text">ICMP flood</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CC攻击"><span class="toc-number">8.</span> <span class="toc-text">CC攻击</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        WEB常见的攻击
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Hexo</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-02-05T10:00:54.987Z" itemprop="datePublished">2020-02-05</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="XSS攻击"><a href="#XSS攻击" class="headerlink" title="XSS攻击"></a>XSS攻击</h3><ul>
+<li>全称跨站脚本攻击   <ul>
+<li>它是一种在web应用中的计算机安全技术漏洞，它允许恶意web用户将代码植入到提供给其他页面使用的页面中   </li>
+</ul>
+</li>
+<li>XSS攻击类型<ul>
+<li>一类是反射型XSS，又称非持久型XSS。当用受害者被引诱点击一个恶意链接，提交一个伪造的表单，恶意代码便会和正常返回数据一起作为响应发送到受害者的浏览器，从而骗过了浏览器，使之误以为恶意脚本来自于可信的服务器，以至于让恶意脚本得以执行。   </li>
+<li>一类是储存型XSS，也就是持久型XSS。注入的脚本永久的存在于目标服务器上，每当受害者向服务器请求此数据时就会重新唤醒攻击脚本；</li>
+<li>一类是DOM型XSS， 有点类似于存储型 XSS。但存储型 XSS 是将恶意脚本作为数据存储在服务器中，每个调用数据的用户都会受到攻击。但 DOM 型 XSS 则是一个本地的行为，更多是本地更新 DOM 时导致了恶意脚本执行。   </li>
+</ul>
+</li>
+<li>XSS防御   <ul>
+<li>特殊字符过滤   <pre><code class="Javascript">&lt;script&gt;<span class="xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span>
+<span class="xml"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span>
+<span class="xml">a，href | events</span>
+<span class="xml">img，src | events</span>
+<span class="xml">style=""</span></code></pre>
+</li>
+</ul>
+</li>
+<li>引入CSP<ul>
+<li>内容安全策略(Content Security Policy)，实质就是白名单制度， 开发者明确告诉客户端，哪些外部资源可以加载和执行，大大增强了网页的安全性。</li>
+<li>XSS与React</li>
+<li>React DOM 在渲染之前默认会过滤所有传入的值。这样可以有效防止XSS攻击</li>
+<li>React中有一个函数<code>dangerouslySetInnerHTML</code>,是React提供的替换浏览器DOM中的innerHTML接口的一个函数。使用此函数时，应该转义相关插入的内容，防止收到XSS攻击。   <h3 id="CSRF攻击"><a href="#CSRF攻击" class="headerlink" title="CSRF攻击"></a>CSRF攻击</h3></li>
+</ul>
+</li>
+<li>跨站请求伪造    <ul>
+<li>CSRF通过伪装来自受信任用户的请求来利用受信任的网站   </li>
+</ul>
+</li>
+<li>攻击的主要过程<ul>
+<li>浏览器登录并访问网站A；   </li>
+<li>验证成功，生成cookie,创建了回话；   </li>
+<li>攻击者构造恶意网址，用户访问恶意地址；</li>
+<li>攻击者获取受害者Cookie,访问网站A；</li>
+<li>攻击者模仿用户登录访问A成功。</li>
+</ul>
+</li>
+<li>攻击侧重点<ul>
+<li>CSRF的攻击建立在浏览器与web服务器的会话之中</li>
+<li>欺骗用户访问url</li>
+</ul>
+</li>
+<li>CSRF防御  <ul>
+<li>客户端<ul>
+<li>验证码验证</li>
+</ul>
+</li>
+<li>服务端<ul>
+<li>验证HTTP Reference字段  <h3 id="DDOS攻击"><a href="#DDOS攻击" class="headerlink" title="DDOS攻击"></a>DDOS攻击</h3></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>分布式拒绝服务<ul>
+<li>主要通过大量合法的请求占用大量网络资源， 从而使合法用户无法得到服务的响应，是目前最强大、最难防御的攻击之一。</li>
+</ul>
+</li>
+<li>DDoS攻击可以针对网络通讯协议的各层，手段大致有：TCP类的SYN Flood、ACK Flood，UDP类的Fraggle、Trinoo，DNS Query Flood，ICMP Flood，Slowloris类。<ul>
+<li><h3 id="SYN-Flood"><a href="#SYN-Flood" class="headerlink" title="SYN Flood"></a>SYN Flood</h3><ul>
+<li>攻击者使用无效IP地址，利用TCP连接的三次握手过程，连续发送会话请求，使受害主机处于开放会话的请求之中，直至连接超时，最终因耗尽资源而停止响应。</li>
+</ul>
+</li>
+<li><h3 id="ACK-Flood"><a href="#ACK-Flood" class="headerlink" title="ACK Flood"></a>ACK Flood</h3><ul>
+<li>在TCP建立连接之后，攻击者通过发送大量不合法的数据包，使主机操作系统耗费大量的精力接收报文、判断状态，同时要主动回应RST报文，正常的数据包就可能无法得到及时的处理。</li>
+</ul>
+</li>
+<li><h3 id="DNS-Query-Flood"><a href="#DNS-Query-Flood" class="headerlink" title="DNS Query Flood"></a>DNS Query Flood</h3><ul>
+<li>DNS Query Flood攻击采用的方法是向被攻击的服务器发送大量的域名解析请求，通常请求解析的域名是随机生成或者是网络世界上根本不存在的域名。如果查找不到并且该域名无法直接由服务器解析的时候，DNS 服务器会向其上层DNS服务器递归查询域名信息。域名解析的过程给服务器带来了很大的负载，每秒钟域名解析请求超过一定的数量就会造成DNS服务器解析域名超时。</li>
+</ul>
+</li>
+<li><h3 id="ICMP-flood"><a href="#ICMP-flood" class="headerlink" title="ICMP flood"></a>ICMP flood</h3><ul>
+<li>通过对其目标发送超过65535字节的数据包，就可以令目标主机瘫痪，如果大量发送就成了洪水攻击。</li>
+</ul>
+</li>
+<li><h3 id="CC攻击"><a href="#CC攻击" class="headerlink" title="CC攻击"></a>CC攻击</h3><ul>
+<li>攻击者通过控制的大量“肉鸡”或者利用从互联网上搜寻的大量匿名的HTTP代理,模拟正常用户给网站发起请求直到该网站拒绝服务为止。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>DDOS防御<ul>
+<li>核心是检测技术和清洗技术</li>
+</ul>
+</li>
+</ul>
+<p>具体详情见–&gt;  <a href="https://www.jianshu.com/p/ab539e9a7955" target="_blank" rel="noopener">https://www.jianshu.com/p/ab539e9a7955</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#XSS攻击"><span class="toc-number">1.</span> <span class="toc-text">XSS攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSRF攻击"><span class="toc-number">2.</span> <span class="toc-text">CSRF攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DDOS攻击"><span class="toc-number">3.</span> <span class="toc-text">DDOS攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SYN-Flood"><span class="toc-number">4.</span> <span class="toc-text">SYN Flood</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ACK-Flood"><span class="toc-number">5.</span> <span class="toc-text">ACK Flood</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS-Query-Flood"><span class="toc-number">6.</span> <span class="toc-text">DNS Query Flood</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ICMP-flood"><span class="toc-number">7.</span> <span class="toc-text">ICMP flood</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CC攻击"><span class="toc-number">8.</span> <span class="toc-text">CC攻击</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/02/05/web%E6%94%BB%E5%87%BB/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/02/05/web%E6%94%BB%E5%87%BB/&text=WEB常见的攻击" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/02/05/web%E6%94%BB%E5%87%BB/&title=WEB常见的攻击" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/02/05/web%E6%94%BB%E5%87%BB/&is_video=false&description=WEB常见的攻击" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=WEB常见的攻击&body=Check out this article: http://yoursite.com/2020/02/05/web%E6%94%BB%E5%87%BB/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/02/05/web%E6%94%BB%E5%87%BB/&title=WEB常见的攻击" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/02/05/web%E6%94%BB%E5%87%BB/&title=WEB常见的攻击" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/02/05/web%E6%94%BB%E5%87%BB/&title=WEB常见的攻击" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/02/05/web%E6%94%BB%E5%87%BB/&title=WEB常见的攻击" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/02/05/web%E6%94%BB%E5%87%BB/&name=WEB常见的攻击&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://yoursite.com/2020/02/05/web%E6%94%BB%E5%87%BB/&t=WEB常见的攻击" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020
+    John Doe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
